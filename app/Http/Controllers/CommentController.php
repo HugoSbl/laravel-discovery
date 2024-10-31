@@ -16,15 +16,14 @@ class CommentController extends Controller
             'message' => 'required|string',
             'blog_id' => 'required|integer|exists:blogs,id',
         ]);
-
         $request->user()->comments()->create($request->only('message', 'blog_id'));
-
-        return redirect()->route('blogs.index');
+        
+        return redirect()->route('blog.index');
     }
 
     public function destroy (Request $request, Comment $comment) {
         $comment->delete();
 
-        return redirect()->route('blogs.index');
+        return redirect()->route('blog.index');
     }
 }

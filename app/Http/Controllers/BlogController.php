@@ -24,13 +24,13 @@ class BlogController extends Controller
 
         $request->user()->blogs()->create($request->only('title', 'message'));
 
-        return redirect()->route('blogs.index');
+        return redirect()->route('blog.index');
     }
 
     public function destroy(Request $request, Blog $blog)
     {
         $blog->delete();
 
-        return redirect()->route('blogs.index');
+        return redirect()->route('blog.index');
     }
 }

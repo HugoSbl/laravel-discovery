@@ -4,6 +4,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,5 +34,21 @@ Route::resource('categories', CategoryController::class)
 Route::resource('blog', BlogController::class)
     ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+Route::resource('comment', CommentController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('role', RoleController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
+    
+Route::resource('user', UserController::class)
+        ->only(['index', 'store', 'destroy'])
+        ->middleware(['auth', 'verified']);
+
+Route::put('user/{user}/updateRole', [UserController::class, 'updateRole'])
+        ->name('user.updateRole')
+        ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
